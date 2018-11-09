@@ -31,9 +31,22 @@ namespace Labb2
                 //y = 0;
             }
         }
+ 
 
-        public Position()
+        public Position(int xCoord, int yCoord)
         {
+            X = xCoord;
+            Y = yCoord;
+        }
+
+        public double Length(int xCoord, int yCoord)
+        {
+            return Math.Sqrt(xCoord * xCoord + yCoord * yCoord);
+        }
+
+        public bool Equals(Position p)
+        {
+            return p.X == X && p.Y == Y;
         }
     }
 }
