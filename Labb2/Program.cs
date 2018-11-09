@@ -6,6 +6,17 @@ namespace Labb2
     {
         public static void Main(string[] args)
         {
+            Position one = new Position(3, 3);
+
+            Position two = one.Clone();
+
+            Position three = new Position(4, 4);
+
+            Console.WriteLine(two);
+            Console.WriteLine(one.Length());
+            Console.WriteLine(one.Equals(three));
+            Console.ReadLine();
+
 
             //Console.WriteLine(new Position(2, 4) + new Position(1, 2) + "\n");
             //Console.WriteLine(new Position(2, 4) - new Position(1, 2) + "\n");

@@ -12,10 +12,6 @@ namespace Labb2
             set
             {
                 x = (value >= 0) ? value : 0;
-                //if (value >= 0)
-                //    x = value;
-
-                //x = 0;
             }
         }
 
@@ -25,10 +21,6 @@ namespace Labb2
             set
             {
                 y = (value >= 0) ? value : 0 ;
-                //if (value >= 0)
-                //    y = value;
-
-                //y = 0;
             }
         }
  
@@ -39,14 +31,27 @@ namespace Labb2
             Y = yCoord;
         }
 
-        public double Length(int xCoord, int yCoord)
+        public double Length()
         {
-            return Math.Sqrt(xCoord * xCoord + yCoord * yCoord);
+            double xValue = Math.Pow(x, 2);
+            double yValue = Math.Pow(y, 2);
+            return Math.Sqrt(xValue + yValue);
         }
+
 
         public bool Equals(Position p)
         {
             return p.X == X && p.Y == Y;
+        }
+
+        public Position Clone()
+        {
+            return new Position(X, Y);
+        }
+
+        public override String ToString()
+        {
+            return "(" + X + ", " + Y + ")";
         }
     }
 }
