@@ -12,9 +12,23 @@ namespace Labb2
 
             Position three = new Position(4, 4);
 
-            Console.WriteLine(two);
-            Console.WriteLine(one.Length());
-            Console.WriteLine(one.Equals(three));
+            Position four = one + three;
+
+            Position five = three - one;
+
+            double distanceBetween = one % three;
+
+            bool larger = three > one;
+            bool smaller = three < one;
+
+            Console.WriteLine("Testing Length() : " + one.Length());
+            Console.WriteLine("Testing Equals() : " +one.Equals(three));
+            Console.WriteLine("Testing Clone() samt ToString() : " + two);
+            Console.WriteLine("Testing operator > : " + larger);
+            Console.WriteLine("Testing operator < : " + smaller);
+            Console.WriteLine("Testing operator + : " + four);
+            Console.WriteLine("Testing operator - : " + five);
+            Console.WriteLine("Testing operator % : " + distanceBetween);
             Console.ReadLine();
 
 

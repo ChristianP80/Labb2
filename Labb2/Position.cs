@@ -59,7 +59,7 @@ namespace Labb2
 
         public static bool operator <(Position p1, Position p2)
         {
-            return p1.Length().Equals(p2.Length()) ? p1.x < p2.x : p1.Length() < p2.Length(;
+            return p1.Length().Equals(p2.Length()) ? p1.x < p2.x : p1.Length() < p2.Length();
             //if (p1.Length().Equals(p2.Length()))
             //    return p1.x < p2.x;
 
