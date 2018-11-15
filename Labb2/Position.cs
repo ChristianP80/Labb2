@@ -17,7 +17,6 @@ namespace Labb2
             get { return y; }
             set { y = (value >= 0) ? value : 0 ; }
         }
- 
 
         public Position(int xCoord, int yCoord)
         {
@@ -31,7 +30,6 @@ namespace Labb2
             double yValue = Math.Pow(y, 2);
             return Math.Sqrt(xValue + yValue);
         }
-
 
         public bool Equals(Position p)
         {
@@ -51,35 +49,27 @@ namespace Labb2
         public static bool operator >(Position p1, Position p2)
         {
             return p1.Length().Equals(p2.Length()) ? p1.x > p2.x : p1.Length() > p2.Length();
-            //if (p1.Length().Equals(p2.Length()))
-            //    return p1.x > p2.x;
-
-            //return p1.Length() > p2.Length();
         }
 
         public static bool operator <(Position p1, Position p2)
         {
             return p1.Length().Equals(p2.Length()) ? p1.x < p2.x : p1.Length() < p2.Length();
-            //if (p1.Length().Equals(p2.Length()))
-            //    return p1.x < p2.x;
-
-            //return p1.Length() < p2.Length();
         }
 
         public static Position operator +(Position p1, Position p2)
         {
-            return new Position(p1.x + p2.x, p1.y + p2.y);
+            return new Position(p1.X + p2.X, p1.Y + p2.Y);
         }
 
         public static Position operator -(Position p1, Position p2)
         {
-            return new Position(p1.x - p2.x, p1.y - p2.y);
+            return new Position(p1.X- p2.X, p1.Y - p2.Y);
         }
 
         public static double operator %(Position p1, Position p2)
         {
-            double xValue = Math.Pow(p1.x - p2.x, 2);
-            double yValue = Math.Pow(p1.y - p2.y, 2);
+            double xValue = Math.Pow(p1.X - p2.X, 2);
+            double yValue = Math.Pow(p1.Y - p2.Y, 2);
             return Math.Sqrt(xValue + yValue);
         }
     }
