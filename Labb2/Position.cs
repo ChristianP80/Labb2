@@ -3,22 +3,22 @@ namespace Labb2
 {
     public class Position
     {
-        private int x;
-        private int y;
+        private double x;
+        private double y;
 
-        public int X
+        public double X
         {
             get { return x; }
             set { x = (value >= 0) ? value : 0; }
         }
 
-        public int Y
+        public double Y
         {
             get { return y; }
             set { y = (value >= 0) ? value : 0 ; }
         }
 
-        public Position(int xCoord, int yCoord)
+        public Position(double xCoord, double yCoord)
         {
             X = xCoord;
             Y = yCoord;

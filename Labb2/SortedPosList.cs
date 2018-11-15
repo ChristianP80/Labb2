@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace Labb2
 {
     public class SortedPosList
     {
-        private string filePath;
-
-        public string Filepath
-        {
-            get { return filePath; }
-            set { filePath = value; }
-        }
+        private readonly string filePath;
+        public bool syncedToFile;
 
         private List<Position> sortedPosList;
 
@@ -22,33 +18,65 @@ namespace Labb2
             set { sortedPosList = value; }
         }
 
-        public SortedPosList() { sortedPosList = new List<Position>(); }
-
-        public SortedPosList(string filePath)
+        public SortedPosList()
         {
             sortedPosList = new List<Position>();
-            this.filePath = filePath;
-            Load();
-
+            syncedToFile = false;
         }
 
-        private void Load()
+        public SortedPosList(string fileName)
         {
-            if(!System.IO.File.Exists(filePath))
+            sortedPosList = new List<Position>();
+            filePath = Directory.GetCurrentDirectory() + "/" + fileName;
+            syncedToFile = true;
+            if (File.Exists(filePath))
             {
-                using (System.IO.FileStream fs = System.IO.File.Create(filePath))
-                {
-                    for (byte i = 0; i < 100; i++)
-                    {
-                        fs.WriteByte(i);
-                    }
-                }
+                LoadFromFile();
             }
             else
             {
-                Console.WriteLine("File \"{0}\" already exists.", filePath);
-                return;
+                CreateFile();
             }
+        }
+
+        private void LoadFromFile()
+        {
+            Console.WriteLine("File already created");
+            string[] listFromFile = File.ReadAllLines(filePath);
+            sortedPosList.Clear();
+            foreach (string pos in listFromFile)
+            {
+
+                Add(ParseToPosition(pos));
+            }
+        }
+
+        private Position ParseToPosition(string pos)
+        {
+            char[] charsToRemove = { '(', ')' };
+            string trimedPosition = pos.Trim(charsToRemove);
+            string[] stringPos = trimedPosition.Split(',');
+            Position parsedPosition = new Position(double.Parse(stringPos[0]), double.Parse(stringPos[1]));
+            return parsedPosition;
+        }
+
+        private void CreateFile()
+        {
+            using (FileStream fs = File.Create(filePath))
+            {
+                Console.WriteLine("Created file at path: {0}", filePath);
+            }
+        }
+
+        private void SaveToFile()
+        {
+            string[] positions = new string[sortedPosList.Count];
+            for (int i = 0; i < sortedPosList.Count; i++)
+            {
+                positions[i] = sortedPosList[i].ToString();
+            }
+            File.WriteAllLines(this.filePath, positions);
+            Console.WriteLine("saved to file");
         }
 
         public int Count()
@@ -60,6 +88,10 @@ namespace Labb2
         {
             sortedPosList.Add(position);
             sortedPosList.Sort((pos1, pos2) => pos1.Length().CompareTo(pos2.Length()));
+            if(syncedToFile)
+            {
+                SaveToFile();
+            }
         }
 
         public bool Remove(Position pos)
@@ -69,6 +101,10 @@ namespace Labb2
             {
                 sortedPosList.RemoveAll(position => position.Equals(pos));
                 removed = true;
+            }
+            if(syncedToFile)
+            {
+                SaveToFile();
             }
             return removed;
         }
@@ -81,7 +117,7 @@ namespace Labb2
 
             foreach(Position position in sortedPosList)
             {
-                clonedObject.sortedPosList.Add(position);
+                clonedObject.sortedPosList.Add(position.Clone());
             }
 
             return clonedObject;
