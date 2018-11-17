@@ -11,6 +11,7 @@ namespace Labb2
         public bool syncedToFile;
 
         private List<Position> sortedPosList;
+        public static List<SortedPosList> syncedInstances = new List<SortedPosList>();
 
         public List<Position> SortedList
         {
@@ -28,6 +29,7 @@ namespace Labb2
         {
             sortedPosList = new List<Position>();
             filePath = Directory.GetCurrentDirectory() + "/" + fileName;
+            syncedInstances.Add(this);
             syncedToFile = true;
             if (File.Exists(filePath))
             {
@@ -86,6 +88,10 @@ namespace Labb2
                 positions[i] = sortedPosList[i].ToString();
             }
             File.WriteAllLines(this.filePath, positions);
+            foreach(SortedPosList synced in syncedInstances)
+            {
+                synced.sortedPosList = sortedPosList;
+            }
         }
 
         public int Count()

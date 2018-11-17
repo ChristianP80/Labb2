@@ -139,6 +139,20 @@ namespace Labb2
             SortedPosList testLoad3 = new SortedPosList(fileName);
             Console.WriteLine("testload 3 : {0}", testLoad3);
 
+            Console.WriteLine();
+            Console.WriteLine("Förväntar mig 'file already created fyra gånger då jag skapar fyra nya synkade listor, \n" +
+                              "lägger till en ny position (1000, 1000) i en av listorna och loopar igenom för att testa om \n" +
+                              "dom verkligen är synkade mot filen");
+            SortedPosList synced1 = new SortedPosList(fileName);
+            SortedPosList synced2 = new SortedPosList(fileName);
+            SortedPosList synced3 = new SortedPosList(fileName);
+            SortedPosList synced4 = new SortedPosList(fileName);
+            synced4.Add(new Position(1000, 1000));
+
+            foreach(SortedPosList sync in SortedPosList.syncedInstances)
+            {
+                Console.WriteLine(sync);
+            }
         }
     }
 }
