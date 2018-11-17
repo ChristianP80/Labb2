@@ -6,124 +6,139 @@ namespace Labb2
     {
         public static void Main(string[] args)
         {
-            //Position one = new Position(3, 3);
+            Position one = new Position(3, 3);
 
-            //Position two = one.Clone();
+            Position two = one.Clone();
 
-            //Position three = new Position(4, 4);
+            Position three = new Position(4, 4);
 
-            //Position four = one + three;
+            Position four = one + three;
 
-            //Position five = three - one;
+            Position five = three - one;
 
-            //double distanceBetween = one % three;
+            Position six = new Position(10, 10);
 
-            //bool larger = three > one;
-            //bool smaller = three < one;
+            double distanceBetween = one % three;
 
-            //SortedPosList sorted = new SortedPosList();
-            //sorted.Add(three);
-            //sorted.Add(one);
-            //sorted.Add(four);
-            //sorted.Add(four);
+            bool larger = three > one;
+            bool larger2 = one > three;
+            bool smaller = three < one;
+            bool smaller2 = one < three;
 
-            //Console.WriteLine("Testing Length() : " + one.Length());
-            //Console.WriteLine("Testing Equals() : " + one.Equals(three));
-            //Console.WriteLine("Testing Clone() samt ToString() : " + two);
-            //Console.WriteLine("Testing operator > : " + larger);
-            //Console.WriteLine("Testing operator < : " + smaller);
-            //Console.WriteLine("Testing operator + : " + four);
-            //Console.WriteLine("Testing operator - : " + five);
-            //Console.WriteLine("Testing operator % : " + distanceBetween);
-            //Console.WriteLine("Testing Count() on sortedPosList : " + sorted.SortedList.Count);
+            SortedPosList sorted = new SortedPosList();
+            sorted.Add(three);
+            sorted.Add(one);
+            sorted.Add(four);
+            sorted.Add(five);
 
-            //for (int i = 0; i < sorted.SortedList.Count; i++)
-            //{
-            //    Console.WriteLine("Testing sorting on SortedPosList, Pos {0} contains {1}", i, sorted.SortedList[i]);
-            //}
+            Console.WriteLine("Förväntar mig avståndet från origo till given position {0}", one );
+            Console.WriteLine("Testing Length() : {0} \n", one.Length());
 
-            //Console.WriteLine("Testing Remove() on sortedPosList : " + sorted.Remove(four));
-            //Console.WriteLine("Testing Remove() on sortedPosList : " + sorted.Remove(two));
+            Console.WriteLine("Förväntar mig false, (3, 3) är inte lika med (4, 4)");
+            Console.WriteLine("Testing Equals() : {0} \n", one.Equals(three));
 
-            //foreach (var pos in sorted.SortedList)
-            //{
-            //    Console.WriteLine("After Remove() on SortedPosList, it contains {0}", pos);
-            //}
+            Console.WriteLine("Förvänar mig (3, 3) då jag klonat position one som är (3, 3)");
+            Console.WriteLine("Testing Clone() samt ToString() : {0} \n", two);
 
-            //SortedPosList sortedCopy = sorted.Clone();
-            //Console.WriteLine("Testing Clone() on SortedPosList");
-            //foreach(Position position in sortedCopy.SortedList)
-            //{
-            //    Console.WriteLine("Position in clone : " + position);
-            //}
+            Console.WriteLine("Förväntar mig true, (4, 4) är större än (3, 3)");
+            Console.WriteLine("Testing operator > : {0} \n", larger);
 
-            //SortedPosList withinRadius = sorted.CircleContent(new Position(5, 5), 4);
-            //foreach (Position position in withinRadius.SortedList)
-            //{
-            //    Console.WriteLine("Positions inside circle : " + position);
-            //}
+            Console.WriteLine("Förväntar mig false, (3, 3) är INTE större än (4, 4)");
+            Console.WriteLine("Testing operator > : {0} \n", larger2);
 
-            //Console.WriteLine("Testing getter on position: " + sorted.SortedList[1]);
+            Console.WriteLine("förväntar mig false, (4, 4) är inte mindre än (3, 3)");
+            Console.WriteLine("Testing operator < : {0} \n", smaller);
 
-            //Console.WriteLine("Sorted contains: " + sorted);
-            //Console.WriteLine("SortedCopy contains: " + sortedCopy);
+            Console.WriteLine("förväntar mig true, (3, 3) är mindre än (4, 4)");
+            Console.WriteLine("Testing operator < : {0} \n", smaller2);
 
-            //sortedCopy.Add(five);
+            Console.WriteLine("förväntar mig (7, 7) då (3, 3) + (4, 4) blir det");
+            Console.WriteLine("Testing operator + : {0} \n", four);
 
-            //Console.WriteLine("Testing operator - on lists: " + (sortedCopy - sorted));
+            Console.WriteLine("förväntar mig (1, 1) då (4, 4) - (3, 3) blir det");
+            Console.WriteLine("Testing operator - : {0} \n", five);
 
-            //Console.WriteLine("Sorted contains: " + sorted);
-            //Console.WriteLine("SortedCopy contains: " + sortedCopy);
+            Console.WriteLine("förväntar mig avståndet mellan (3, 3) och (4, 4)");
+            Console.WriteLine("Testing operator % : {0} \n", distanceBetween);
 
-            //Console.ReadLine();
+            Console.WriteLine("förväntar mig 4 då jag lagt till 4 positioner");
+            Console.WriteLine("Testing Count() on sortedPosList : {0} \n", sorted.SortedList.Count);
+
+            Console.WriteLine("Förväntar mig en sorterad lista på fyra positioner");
+            for (int i = 0; i < sorted.SortedList.Count; i++)
+            {
+                Console.WriteLine("Testing sorting on SortedPosList, Pos {0} contains {1}", i, sorted.SortedList[i]);
+            }
+            Console.WriteLine();
+
+            Console.WriteLine("Förväntar mig true, true, false samt att listan är två mindre då jag kör Remove() på två positioner");
+            Console.WriteLine("Testing Remove() on sortedPosList : {0}", sorted.Remove(four));
+            Console.WriteLine("Testing Remove() on sortedPosList : " + sorted.Remove(two));
+            Console.WriteLine("Testing Remove() on sortedPosList : {0}", sorted.Remove(six));
+            foreach (var pos in sorted.SortedList)
+            {
+                Console.WriteLine("After Remove() on SortedPosList, it contains {0}", pos);
+            }
+            Console.WriteLine();
+
+            SortedPosList sortedCopy = sorted.Clone();
+            Console.WriteLine("Testing Clone() on SortedPosList");
+            foreach(Position position in sortedCopy.SortedList)
+            {
+                Console.WriteLine("Position in clone : " + position);
+            }
+            Console.WriteLine();
+
+            Console.WriteLine("Förväntar mig två punkter innan för given cirekl med given radie (1, 1) radie 5");
+            SortedPosList withinRadius = sorted.CircleContent(new Position(1, 1), 5);
+            foreach (Position position in withinRadius.SortedList)
+            {
+                Console.WriteLine("Positions inside circle : " + position);
+            }
+
+            Console.WriteLine();
+            SortedPosList toAdd = new SortedPosList();
+            toAdd.Add(new Position(1, 1));
+            toAdd.Add(new Position(8, 8));
+            toAdd.Add(new Position(11, 11));
+            toAdd.Add(new Position(3, 3));
+
+            SortedPosList addingLists = sorted + toAdd;
+            Console.WriteLine("Förväntar mig en ny sammanslagen lista av sorted + toAdd");
+            Console.WriteLine("Testing operator + on SortedPosLists : {0}", addingLists);
+
+            Console.WriteLine();
+            Console.WriteLine("Förväntar mig (4, 4) sorted[1] är det");
+            Console.WriteLine("Testing getter on position: " + sorted[1]);
+
+            Console.WriteLine();
+            sortedCopy.Add(new Position(20, 20));
+            Console.WriteLine("Sorted contains: " + sorted);
+            Console.WriteLine("SortedCopy contains: " + sortedCopy);
+            Console.WriteLine("Förväntar mig en position (20, 20)");
+            Console.WriteLine("Testing operator - on lists: " + (sortedCopy - sorted));
 
 
-            //Console.WriteLine(new Position(2, 4) + new Position(1, 2) + "\n");
-            //Console.WriteLine(new Position(2, 4) - new Position(1, 2) + "\n");
-            //Console.WriteLine(new Position(1, 2) - new Position(3, 6) + "\n");
-            //Console.WriteLine(new Position(3, 5) % new Position(1, 3) + "\n");
-
-            SortedPosList list1 = new SortedPosList();
-            //SortedPosList list2 = new SortedPosList();
-            //list1.Add(new Position(3, 7));
-            //list1.Add(new Position(1, 4));
-            //list1.Add(new Position(2, 6));
-            //list1.Add(new Position(2, 3));
-            //Console.WriteLine(list1 + "\n");
-            //Console.WriteLine(list1.Remove(new Position(2, 6)));
-            //Console.WriteLine(list1 + "\n");
-
-            //list2.Add(new Position(3, 7));
-            //list2.Add(new Position(1, 2));
-            //list2.Add(new Position(3, 6));
-            //list2.Add(new Position(2, 3));
-            //Console.WriteLine((list2 + list1) + "\n");
-
-            //SortedPosList circleList = new SortedPosList();
-            //circleList.Add(new Position(1, 1));
-            //circleList.Add(new Position(2, 2));
-            //circleList.Add(new Position(3, 3));
-            //Console.WriteLine(circleList.CircleContent(new Position(5, 5), 4) + "\n");
-
-            string fileName = "writePosToFile.txt";
-
-            //SortedPosList listFromFile = new SortedPosList(fileName);
+            const string fileName = "writePosToFile.txt";
+            Console.WriteLine();
+            Console.WriteLine("Färväntar mig att den skapar upp en fil, sen hintar om att fil redan är \n skapad, samt att den sparar ett antal position till fil");
+            SortedPosList listFromFile = new SortedPosList(fileName);
             SortedPosList testLoad2 = new SortedPosList(fileName);
+
+            listFromFile.Add(new Position(10, 10));
+            listFromFile.Add(new Position(1, 1));
+            listFromFile.Add(new Position(2, 2));
+            listFromFile.Add(new Position(30, 30));
+            listFromFile.Add(new Position(5, 5));
+            listFromFile.Add(new Position(4, 4));
+            listFromFile.Add(new Position(9, 9));
+            listFromFile.Add(new Position(5, 5));
+
+            Console.WriteLine();
+            Console.WriteLine("Förväntar mig 'file already created' och att den nya sortedPosList laddar in alla positioner ifrån filen");
             SortedPosList testLoad3 = new SortedPosList(fileName);
-            testLoad3.Add(new Position(10, 10));
+            Console.WriteLine("testload 3 : {0}", testLoad3);
 
-
-
-            Console.ReadLine();
-            //listFromFile.Add(new Position(1, 1));
-            //listFromFile.Add(new Position(2, 2));
-            //listFromFile.Add(new Position(5, 5));
-            //listFromFile.Add(new Position(4, 4));
-            //listFromFile.Add(new Position(9, 9));
-            //listFromFile.Add(new Position(5, 5));
-
-            //Console.WriteLine(listFromFile.syncedToFile);
-            //Console.WriteLine(list1.syncedToFile);
         }
     }
 }

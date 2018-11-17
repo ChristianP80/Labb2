@@ -51,6 +51,16 @@ namespace Labb2
             }
         }
 
+        public void Add(Position position)
+        {
+            sortedPosList.Add(position);
+            sortedPosList.Sort((pos1, pos2) => pos1.Length().CompareTo(pos2.Length()));
+            if(syncedToFile)
+            {
+                SaveToFile();
+            }
+        }
+
         private Position ParseToPosition(string pos)
         {
             char[] charsToRemove = { '(', ')' };
@@ -76,7 +86,6 @@ namespace Labb2
                 positions[i] = sortedPosList[i].ToString();
             }
             File.WriteAllLines(this.filePath, positions);
-            Console.WriteLine("saved to file");
         }
 
         public int Count()
@@ -84,21 +93,13 @@ namespace Labb2
             return sortedPosList.Count;
         }
 
-        public void Add(Position position)
-        {
-            sortedPosList.Add(position);
-            sortedPosList.Sort((pos1, pos2) => pos1.Length().CompareTo(pos2.Length()));
-            if(syncedToFile)
-            {
-                SaveToFile();
-            }
-        }
 
         public bool Remove(Position pos)
         {
             bool removed = false;
             if (sortedPosList.Exists(position => position.Equals(pos)))
             {
+                Console.WriteLine("to be deleted : {0}", pos);
                 sortedPosList.RemoveAll(position => position.Equals(pos));
                 removed = true;
             }
@@ -128,8 +129,10 @@ namespace Labb2
             SortedPosList withinCircleList = new SortedPosList();
             foreach (Position p in sortedPosList)
             {
-                if (p % centerPos <= radius)
-                    withinCircleList.Add(p);
+                if ((Math.Pow(p.X - centerPos.X, 2) + (Math.Pow(p.Y - centerPos.Y, 2))) < Math.Pow(radius, 2))
+                {
+                    withinCircleList.Add(p.Clone());
+                }
             }
             return withinCircleList;
         }
