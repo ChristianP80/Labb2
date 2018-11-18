@@ -83,7 +83,7 @@ namespace Labb2
 
             //Testar att klona en lista och skriver ut den sedan
             SortedPosList sortedCopy = sorted.Clone();
-            Console.WriteLine("Testing Clone() on SortedPosList");
+            Console.WriteLine("Testing Clone() on a list");
             foreach(Position position in sortedCopy.SortedList)
             {
                 Console.WriteLine("Position in clone : " + position);
@@ -91,7 +91,7 @@ namespace Labb2
             Console.WriteLine();
 
             //Test för att kolla om det finns nån cirkel innanför given cirkels pos och radie
-            Console.WriteLine("Förväntar mig två punkter innan för given cirekl med given radie (1, 1) radie 5");
+            Console.WriteLine("Förväntar mig två punkter innanför given cirkel med given radie : (1, 1) radie 5");
             SortedPosList withinRadius = sorted.CircleContent(new Position(1, 1), 5);
             foreach (Position position in withinRadius.SortedList)
             {
